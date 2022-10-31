@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import KBP from '../assets/images/KBP.jpg'
 import { buildFileURL } from '../utils/helpers';
 import { AiOutlineTwitter, AiFillFacebook, AiFillMail, AiFillPhone } from 'react-icons/ai'
+import {HiLocationMarker} from 'react-icons/hi'
 import { FaWikipediaW } from 'react-icons/fa'
 import { aboutSection } from '../data/homepage';
 import client from '../api/client';
@@ -67,10 +68,19 @@ const About = () => {
                                     <FaWikipediaW className='cursor-pointer hover:text-gray-400' size={24} />
                                 </a>
                             </span>
+                            <span>
+                                <a href='https://goo.gl/maps/vFLmNEWFfqKCCgai8' target='_blank'>
+                                    <HiLocationMarker className='cursor-pointer hover:text-red-600' size={24} />
+                                </a>
+                            </span>
                         </div>
                         <img src={mainImage} className='w-2/3 rounded shadow-xl aspect-auto' />
                     </div>
                     <div className='col-span-3 h-full text-justify tracking-wider space-y-4 px-3'>
+                        <div className='text-left mt-2'>
+                        <h2 className='text-xl md:text-4xl font-montserrat font-semibold tracking-wide'>{data?.title}</h2>
+                        <h3 className='text-base md:text-lg font-[500]'><i>{data?.subtitle}</i></h3>
+                        </div>
                         <p >
                             {
                                 data?.intro ? data?.intro : aboutSection?.introtext
@@ -85,6 +95,10 @@ const About = () => {
                             {
                                 data?.final ? data?.final : aboutSection?.finaltext
                             }
+                        </p>
+                        <p>
+                            <p className='font-semibold '>Education and Credentials</p>
+                            <p className='ml-2'><span className='font-[500]'>Bachelor's in Law: </span>Nepal Law Campus, Kathmandu, Nepal</p>
                         </p>
                     </div>
 
