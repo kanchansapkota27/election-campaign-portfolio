@@ -25,8 +25,8 @@ const navs=[
         path:'/support'
     },
     {
-        name:'Events',
-        path:'/events'
+        name:'Media',
+        path:'/news'
     },
     {
         name:'Contact',

@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf';
-import { Worker } from '@react-pdf-viewer/core';
 
 // Import the styles
 import DMainfesto from '../assets/pdf/manifestos/default.pdf'
 import { buildFileURL } from '../utils/helpers';
 import { AiOutlineDownload } from 'react-icons/ai'
 import client from '../api/client';
-import {apiurl} from '../api/data';
-import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Manifesto = () => {
@@ -35,19 +31,22 @@ const Manifesto = () => {
         changePage(1);
     } 
     const getData = async () => {
-
+        const pdfquery = await client.records.getFullList('manifesto', 1, {
+            sort: '-created'
+        }).then((resp) => {
+            const pageData = resp[0];
+            const manifest = buildFileURL('manifesto', pageData?.id, pageData?.manifestpdf);
+            pageData?.manifestpdf && setManifestoURL(manifest);
+        });
         const query = await client.records.getFullList('manifestoimg', 50, {
             sort: '-created'
         }).then((resp) => {
             const pageData = resp[0];
             console.log(pageData);
-            const manifest = buildFileURL('manifestoimg', pageData?.id, pageData?.manifestpdf);
             const manifestImages = pageData?.image?.map((img) => {return buildFileURL('manifestoimg', pageData?.id, img)});
             console.log(manifestImages);
             setManifestImg(manifestImages);
-            pageData?.manifestpdf &&setManifestoURL(manifest);
             console.log(manifestoURL)
-            console.log(manifest);
         }).catch((err) => {
             console.error(err)
         })
@@ -64,7 +63,6 @@ const Manifesto = () => {
 
     return (
         <>
-        <Worker workerUrl={`https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.worker.min.js`}>
             <div className='w-fullz  px-3 py-2 flex items-center flex-col gap-2'>
                 <div className='w-full p-4 bg-blue-500'>
                     <h1 className='text-2xl text-white font-bold'>
@@ -90,9 +88,11 @@ const Manifesto = () => {
                         })
                     }
                 </div>
+                {/* <Document file={manifestoURL}>
+                    <Page pageNumber={pageNumber} />
+                </Document> */}
                 <span className='mt-5'></span>
             </div>
-            </Worker>
         </>
     )
 }
