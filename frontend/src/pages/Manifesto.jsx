@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf';
+import { Worker } from '@react-pdf-viewer/core';
 
 // Import the styles
 import DMainfesto from '../assets/pdf/manifestos/default.pdf'

@@ -21,6 +21,11 @@ const navs=[
         path:'/manifesto'
     },
     {
+        name:'Documents',
+        path:'/docs'
+    },
+
+    {
         name:'Join the Team',
         path:'/support'
     },

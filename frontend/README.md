@@ -6,6 +6,7 @@ The fronend was built with [Vite](https://vitejs.dev/guide/)+[ReactJS](https://r
 * Home
 * About
 * Manifesto 
+* Documents
 * Join The Team 
 * Media
 * Contact Us
