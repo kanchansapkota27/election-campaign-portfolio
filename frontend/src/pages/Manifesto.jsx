@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf';
-import { Worker } from '@react-pdf-viewer/core';
 
 // Import the styles
 import DMainfesto from '../assets/pdf/manifestos/default.pdf'
@@ -13,24 +12,6 @@ const Manifesto = () => {
 
     const [manifestoURL, setManifestoURL] = useState(DMainfesto);
     const [manifestImg, setManifestImg] = useState([]);
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-        setPageNumber(1);
-    }
-
-    function changePage(offset) {
-        setPageNumber(prevPageNumber => prevPageNumber + offset);
-    }
-
-    function previousPage() {
-        changePage(-1);
-    }
-
-    function nextPage() {
-        changePage(1);
-    } 
     const getData = async () => {
         const pdfquery = await client.records.getFullList('manifesto', 1, {
             sort: '-created'
